@@ -4,6 +4,7 @@
         "psr-4": {
             "Horizon\\Core\\": "core/",
             "Horizon\\Core\\Router\\": "core/router/",
+            "Horizon\\Core\\Env\\": "core/env/",
 
             "Horizon\\Src\\": "src/"
         }
