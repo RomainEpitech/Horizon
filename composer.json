@@ -2,7 +2,8 @@
     "name": "saskoue/horizon",
     "autoload": {
         "psr-4": {
-            "Horizon\\Core\\": "",
+            "Horizon\\Core\\": "core/",
+            "Horizon\\Core\\Router\\": "core/router/",
 
             "Horizon\\Src\\": "src/"
         }
