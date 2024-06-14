@@ -1,0 +1,17 @@
+{
+    "name": "saskoue/horizon",
+    "autoload": {
+        "psr-4": {
+            "Horizon\\Core\\": "",
+
+            "Horizon\\Src\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Saskoue",
+            "email": "romain.farinacci@hotmail.com"
+        }
+    ],
+    "require": {}
+}
