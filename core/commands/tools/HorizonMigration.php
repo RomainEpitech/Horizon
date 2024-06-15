@@ -11,7 +11,7 @@
         public function newMigration() {
             $timestamp = date('YmdHis');
             $filePath = __DIR__ . "/../../../migrations/Version{$timestamp}.php";
-            $migrationTemplate = "<?php\n\n    use Core\Commands\Migration\AbstractMigration;\n\n    class Version{$timestamp} extends AbstractMigration {\n\n        public function up() {\n            //\n        }\n\n        public function down() {\n            //\n        }\n    }";
+            $migrationTemplate = "<?php\n\n    use Horizon\Core\Commands\Migration\AbstractMigration;\n\n    class Version{$timestamp} extends AbstractMigration {\n\n        public function up() {\n            //\n        }\n\n        public function down() {\n            //\n        }\n    }";
 
             if (!file_exists(dirname($filePath))) {
                 mkdir(dirname($filePath), 0777, true);
