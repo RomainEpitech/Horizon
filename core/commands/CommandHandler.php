@@ -1,7 +1,7 @@
 <?php
 
     namespace Horizon\Core\Commands;
-
+    require './vendor/autoload.php';
     use Horizon\Core\Commands\Tools\HorizonServer;
 
     class CommandHandler {
