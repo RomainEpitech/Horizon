@@ -5,6 +5,7 @@
 
     use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
+    use Horizon\Core\LogHandler;
 
     class CommandHandler {
         public function handle($command, $params) {
@@ -17,6 +18,32 @@
                     $newMigration = new HorizonMigration();
                     $newMigration->newMigration();
                     break;
+                case 'build:run':
+                    $this->runBuildScript();
+                    break;
+                case 'log:clear':
+                    $logHandler = new LogHandler();
+                    $logHandler->clearLog();
+                    break;
+            }
+        }
+
+        private function runBuildScript() {
+            $scriptPath = __DIR__ . '/../../settings/build.sh';
+            
+            if (!is_executable($scriptPath)) {
+                echo "Build script is not executable. Attempting to set executable permissions...\n";
+                chmod($scriptPath, 0755);
+            }
+    
+            if (is_executable($scriptPath)) {
+                echo "Executing build script...\n";
+                passthru($scriptPath, $returnVar);
+                if ($returnVar !== 0) {
+                    echo "Build script failed with status code: $returnVar\n";
+                } else {
+                    echo "Build script executed successfully.\n";
+                }
             }
         }
 
