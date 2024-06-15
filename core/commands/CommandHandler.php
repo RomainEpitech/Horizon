@@ -21,6 +21,9 @@
                 case 'build:run':
                     $this->runBuildScript();
                     break;
+                case 'reset:run':
+                    $this->runResetScript();
+                    break;
                 case 'log:clear':
                     $logHandler = new LogHandler();
                     $logHandler->clearLog();
@@ -36,6 +39,25 @@
                 chmod($scriptPath, 0755);
             }
     
+            if (is_executable($scriptPath)) {
+                echo "Executing build script...\n";
+                passthru($scriptPath, $returnVar);
+                if ($returnVar !== 0) {
+                    echo "Build script failed with status code: $returnVar\n";
+                } else {
+                    echo "Build script executed successfully.\n";
+                }
+            }
+        }
+
+        private function runResetScript() {
+            $scriptPath = __DIR__ . '/../../settings/bin/reset.sh';
+
+            if (!is_executable($scriptPath)) {
+                echo "Build script is not executable. Attempting to set executable permissions...\n";
+                chmod($scriptPath, 0755);
+            }
+
             if (is_executable($scriptPath)) {
                 echo "Executing build script...\n";
                 passthru($scriptPath, $returnVar);
