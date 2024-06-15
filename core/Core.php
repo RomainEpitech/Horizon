@@ -19,6 +19,5 @@
             $DbConnect = EnvLoader::get('DB_ACCESS');
 
             if($DbConnect === 'true') $Database = new Database;
-            else echo "ok";
         }
     }
