@@ -20,7 +20,17 @@
         }
 
         public function newMigration($migrationFile) {
-            $logMessage = "[$this->date][Migration] New $migrationFile created." . PHP_EOL;
+            $logMessage = "[$this->date][Migration] New version$migrationFile created." . PHP_EOL;
+            file_put_contents($this->logFile, $logMessage, FILE_APPEND);
+        }
+
+        public function makeMigration($migrationFile) {
+            $logMessage = "[$this->date][Migration] $migrationFile executed." . PHP_EOL;
+            file_put_contents($this->logFile, $logMessage, FILE_APPEND);
+        }
+
+        public function failedMigration($migration) {
+            $logMessage = "[$this->date][Migration] $migration already exist in database." . PHP_EOL;
             file_put_contents($this->logFile, $logMessage, FILE_APPEND);
         }
 

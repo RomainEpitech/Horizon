@@ -19,6 +19,10 @@
                     $newMigration = new HorizonMigration();
                     $newMigration->newMigration();
                     break;
+                case 'migration:run':
+                    $runMigration = new HorizonMigration();
+                    $runMigration->makeMigration();
+                    break;
                 case 'build:run':
                     $this->runBuildScript();
                     break;
