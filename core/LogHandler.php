@@ -19,6 +19,16 @@
             $this->date = $date ?? date('Y-m-d H:i:s');
         }
 
+        public function newMigration($migrationFile) {
+            $logMessage = "[$this->date][Migration] New $migrationFile created." . PHP_EOL;
+            file_put_contents($this->logFile, $logMessage, FILE_APPEND);
+        }
+
+        public function entitiesLog() {
+            $message = "[$this->date][Entities] created and saved in core/entities" . PHP_EOL;
+            file_put_contents($this->logFile, $message);
+        }
+
         public function log($message) {
             $logMessage = "[$this->date] $message" . PHP_EOL;
             file_put_contents($this->logFile, $logMessage, FILE_APPEND);

@@ -19,7 +19,7 @@
 
             file_put_contents($filePath, $migrationTemplate);
             $log = new LogHandler();
-            // $log->newMigration($timestamp);
+            $log->newMigration($timestamp);
             $this->displaySuccessMessage("Migration created successfully.");
         }
     }

@@ -5,6 +5,8 @@
             "Horizon\\Core\\": "core/",
             "Horizon\\Core\\Router\\": "core/router/",
             "Horizon\\Core\\Env\\": "core/env/",
+            "Horizon\\Core\\Entities\\": "core/entities/",
+            "Horizon\\Core\\Mystic\\": "core/mystic/",
             "Horizon\\Core\\Database\\": "core/database/",
             "Horizon\\Core\\Commands\\": "core/commands/",
             "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",

@@ -2,10 +2,12 @@
 
     namespace Horizon\Core\Commands\Tools;
 
+    use Horizon\Core\Commands\CommandHandler;
     use Horizon\Core\Database\Database;
+    use Horizon\Core\LogHandler;
     use PDO;
 
-    class HorizonEntity {
+    class HorizonEntity extends CommandHandler {
         private $pdo;
 
         public function __construct() {
@@ -21,6 +23,9 @@
                 $entityCode = $this->generateEntityCode($table, $columns);
                 file_put_contents("$outputDir/" . ucfirst($table) . ".php", $entityCode);
             }
+            $this->displaySuccessMessage("Entities created successfully.");
+            $log = new LogHandler();
+            $log->entitiesLog();
         }
 
         private function getTables() {
@@ -53,7 +58,7 @@
                 $methods .= "        }\n";
             }
 
-            $entityCode = "<?php\n\n    namespace Core\Entities;\n\n    use Core\Mystic\Mystic;\n\n";
+            $entityCode = "<?php\n\n    namespace Horizon\Core\Entities;\n\n    use Horizon\Core\Mystic\Mystic;\n\n";
             $entityCode .= "    class $className extends Mystic {\n";
             $entityCode .= $properties;
             $entityCode .= $methods;
