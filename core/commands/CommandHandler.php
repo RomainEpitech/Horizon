@@ -3,6 +3,7 @@
     namespace Horizon\Core\Commands;
     require './vendor/autoload.php';
 
+    use Horizon\Core\Commands\Tools\HorizonEntity;
     use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
     use Horizon\Core\LogHandler;
@@ -27,6 +28,11 @@
                 case 'log:clear':
                     $logHandler = new LogHandler();
                     $logHandler->clearLog();
+                    break;
+                case 'entities:make': 
+                    $outputDir = __DIR__ . '/../../core/entities';
+                    $entities = new HorizonEntity;
+                    $entities->generateEntities($outputDir);
                     break;
             }
         }
