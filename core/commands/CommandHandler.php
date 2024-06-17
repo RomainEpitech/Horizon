@@ -3,6 +3,7 @@
     namespace Horizon\Core\Commands;
     require './vendor/autoload.php';
 
+    use Horizon\Core\Commands\Tools\HorizonController;
     use Horizon\Core\Commands\Tools\HorizonEntity;
     use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
@@ -32,11 +33,20 @@
                 case 'log:clear':
                     $logHandler = new LogHandler();
                     $logHandler->clearLog();
+                    $this->displaySuccessMessage("Log cleared successfully");
                     break;
                 case 'entities:make': 
                     $outputDir = __DIR__ . '/../../core/entities';
                     $entities = new HorizonEntity;
                     $entities->generateEntities($outputDir);
+                    break;
+                case 'controller:new':
+                    if(!$params) {
+                        die($this->displayErrorMessage("Please enter a valid controller name"));
+                    }
+                    $newController = new HorizonController();
+                    $newController->makeController($params);
+                    $this->displaySuccessMessage("$params[0]Controller created successfully");
                     break;
             }
         }
@@ -81,21 +91,25 @@
 
         protected function displaySuccessMessage($message) {
             $greenBackground = "\033[42m";
-            $whiteText = "\033[97m";
+            $blackText = "\033[30m";
+            $reset = "\033[0m";
 
-            echo "{$greenBackground}{$whiteText}\n";
+            echo "{$greenBackground}{$blackText}\n";
             echo str_pad(" ", 80) . "\n";
             echo str_pad(" $message ", 80, " ", STR_PAD_BOTH) . "\n";
             echo str_pad(" ", 80) . "\n";
+            echo $reset;
         }
 
         protected function displayErrorMessage($message) {
             $redBackground = "\033[41m";
             $whiteText = "\033[97m";
+            $reset = "\033[0m";
 
             echo "{$redBackground}{$whiteText}\n";
             echo str_pad(" ", 80) . "\n";
             echo str_pad(" $message ", 80, " ", STR_PAD_BOTH) . "\n";
             echo str_pad(" ", 80) . "\n";
+            echo $reset;
         }
     }

@@ -2,9 +2,11 @@
 
     namespace Horizon\Src\Controllers;
 
-    class HomeController {
+    use Horizon\Core\CoreController;
+
+    class HomeController extends CoreController{
         public function index() {
-            echo "Welcome to homepage";
+            $this->render("Home");
         }
         public function api() {
             echo "Welcome to api";

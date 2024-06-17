@@ -46,6 +46,5 @@
 
         public function clearLog() {
             file_put_contents($this->logFile, '');
-            echo "Log file cleared\n";
         }
     }
