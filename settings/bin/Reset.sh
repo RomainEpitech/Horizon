@@ -18,6 +18,9 @@ while IFS= read -r line || [[ -n "$line" ]]; do
             DB_ACCESS)
                 echo "DB_ACCESS=false" >> "$TEMP_FILE"
                 ;;
+            ROUTING_TYPE)
+                echo "ROUTING_ACCESS=web" >> "$TEMP_FILE"
+                ;;
             *)
                 echo "$var_name=default" >> "$TEMP_FILE"
                 ;;
