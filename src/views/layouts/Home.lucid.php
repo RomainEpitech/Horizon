@@ -1,3 +1,3 @@
 Welcome to homepage
 
-<?= $loginForm ?>
+@form => 'loginForm'
