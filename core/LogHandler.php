@@ -35,7 +35,7 @@
         }
 
         public function entitiesLog() {
-            $message = "[$this->date][Entities] created and saved in core/entities" . PHP_EOL;
+            $message = "[$this->date][Entities] Entities created and saved in core/entities" . PHP_EOL;
             file_put_contents($this->logFile, $message, FILE_APPEND);
         }
 

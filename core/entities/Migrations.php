@@ -7,11 +7,11 @@
     class Migrations extends Mystic {
         protected static $tableName = 'Migrations';
 
-        private $id;
+        public $id;
 
         public $migration;
 
-        private $executed_at;
+        public $executed_at;
 
         public function getId() {
             return $this->id;

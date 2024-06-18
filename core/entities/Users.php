@@ -7,17 +7,17 @@
     class Users extends Mystic {
         protected static $tableName = 'Users';
 
-        private $id;
+        public $id;
 
-        private $email;
+        public $email;
 
-        private $password;
+        public $password;
 
-        private $created_at;
+        public $created_at;
 
-        private $token;
+        public $token;
 
-        private $role;
+        public $role;
 
         public function getId() {
             return $this->id;
