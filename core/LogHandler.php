@@ -40,7 +40,7 @@
         }
 
         public function newForm($formName) {
-            $message = "[$this->date][Form] $formName created successfully" . PHP_EOL;
+            $message = "[$this->date][Form] $formName Form created successfully" . PHP_EOL;
             file_put_contents($this->logFile, $message, FILE_APPEND);
         }
 

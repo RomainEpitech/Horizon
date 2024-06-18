@@ -47,7 +47,7 @@
                 $propName = $column['Field'];
                 $propType = $this->mapColumnTypeToPhpType($column['Type']);
 
-                $properties .= "\n        private \$$propName;\n";
+                $properties .= "\n        public \$$propName;\n";
 
                 $methods .= "\n        public function get" . ucfirst($propName) . "() {\n";
                 $methods .= "            return \$this->$propName;\n";
@@ -59,7 +59,7 @@
             }
 
             $entityCode = "<?php\n\n    namespace Horizon\Core\Entities;\n\n    use Horizon\Core\Mystic\Mystic;\n\n";
-            $entityCode .= "    class $className extends Mystic {\n";
+            $entityCode .= "    class $className extends Mystic {\n        protected static \$tableName = '$className';\n";
             $entityCode .= $properties;
             $entityCode .= $methods;
             $entityCode .= "    }\n";

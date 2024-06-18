@@ -1,2 +1,4 @@
 [2024-06-18 10:12:33][Form] Register created successfully
 [2024-06-18 10:13:27][Form] Login created successfully
+[2024-06-18 13:39:37][Entities] created and saved in core/entities
+[2024-06-18 13:39:57][Entities] created and saved in core/entities
