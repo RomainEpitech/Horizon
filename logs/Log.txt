@@ -1,1 +1,2 @@
-[2024-06-17 14:59:32][Migration] New version20240617125932 created.
+[2024-06-18 10:12:33][Form] Register created successfully
+[2024-06-18 10:13:27][Form] Login created successfully

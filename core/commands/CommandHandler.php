@@ -5,10 +5,10 @@
 
     use Horizon\Core\Commands\Tools\HorizonController;
     use Horizon\Core\Commands\Tools\HorizonEntity;
+    use Horizon\Core\Commands\Tools\HorizonFormBuilder;
     use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
     use Horizon\Core\LogHandler;
-
     class CommandHandler {
         public function handle($command, $params) {
             switch ($command) {
@@ -47,6 +47,15 @@
                     $newController = new HorizonController();
                     $newController->makeController($params);
                     $this->displaySuccessMessage("$params[0]Controller created successfully");
+                    break;
+                case 'form:create':
+                    if ($params) {
+                        $formName = $params[0];
+                        $formBuilder = new HorizonFormBuilder();
+                        $formBuilder->createForm($formName);
+                    } else {
+                        echo "Usage: ./Horizon form:make <FormName>\n";;
+                    }
                     break;
             }
         }

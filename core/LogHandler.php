@@ -36,7 +36,12 @@
 
         public function entitiesLog() {
             $message = "[$this->date][Entities] created and saved in core/entities" . PHP_EOL;
-            file_put_contents($this->logFile, $message);
+            file_put_contents($this->logFile, $message, FILE_APPEND);
+        }
+
+        public function newForm($formName) {
+            $message = "[$this->date][Form] $formName created successfully" . PHP_EOL;
+            file_put_contents($this->logFile, $message, FILE_APPEND);
         }
 
         public function log($message) {
