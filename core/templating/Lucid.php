@@ -20,23 +20,23 @@
 
         private function parseTemplate($content, $scope) {
             $content = preg_replace('/\{\{\s*(.+?)\s*\}\}/', '<?= $1 ?>', $content);
-
+    
             // Replace {@form => 'formVariable'} with the rendered form HTML
             $content = preg_replace_callback('/\{@form\s*=>\s*\'(.+?)\'\}/', function($matches) use ($scope) {
                 $formVariable = $matches[1];
                 return '<?= $' . $formVariable . ' ?>';
             }, $content);
-
-            // Replace @foreach and @endforeach with PHP code
-            $content = preg_replace('/@foreach\s*\((.+?)\)/', '<?php foreach($1): ?>', $content);
-            $content = preg_replace('/@endforeach/', '<?php endforeach; ?>', $content);
-
-            // Replace @if, @elseif, @else, and @endif with PHP code
-            $content = preg_replace('/@if\s*\((.+?)\)/', '<?php if($1): ?>', $content);
-            $content = preg_replace('/@elseif\s*\((.+?)\)/', '<?php elseif($1): ?>', $content);
-            $content = preg_replace('/@else/', '<?php else: ?>', $content);
-            $content = preg_replace('/@endif/', '<?php endif; ?>', $content);
-
+    
+            // Replace {@foreach (...) } and {@endforeach} with PHP code
+            $content = preg_replace('/\{@foreach\s*\((.+?)\)\s*\}/', '<?php foreach($1): ?>', $content);
+            $content = preg_replace('/\{@endforeach\s*\}/', '<?php endforeach; ?>', $content);
+    
+            // Replace {@if (...)} and {@endif} with PHP code
+            $content = preg_replace('/\{@if\s*\((.+?)\)\s*\}/', '<?php if($1): ?>', $content);
+            $content = preg_replace('/\{@elseif\s*\((.+?)\)\s*\}/', '<?php elseif($1): ?>', $content);
+            $content = preg_replace('/\{@else\s*\}/', '<?php else: ?>', $content);
+            $content = preg_replace('/\{@endif\s*\}/', '<?php endif; ?>', $content);
+    
             return $content;
         }
 
