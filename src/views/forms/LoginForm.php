@@ -12,7 +12,12 @@
                         'label' => 'Name',
                         'class' => 'form-control'
                     ],
-                    // Add more inputs here
+                    [
+                        'type' => 'text',
+                        'name' => 'name',
+                        'label' => 'Name',
+                        'class' => 'form-control'
+                    ],
                 ]
             ];
         }
