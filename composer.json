@@ -12,6 +12,7 @@
             "Horizon\\Core\\Commands\\": "core/commands/",
             "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",
             "Horizon\\Core\\Commands\\Migration\\": "core/commands/migration/",
+            "Horizon\\Core\\Guards\\Http\\": "core/guards/http/",
 
             "Horizon\\Src\\": "src/",
             "Horizon\\Src\\Views\\Forms\\": "src/views/forms/"

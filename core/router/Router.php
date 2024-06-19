@@ -2,6 +2,8 @@
 
     namespace Horizon\Core\Router;
 
+    use Horizon\Core\Guards\Http\Request;
+
     class Router {
         private static $routes = [];
     
@@ -31,17 +33,20 @@
         }
     
         public static function dispatch($method, $url) {
+            $method = strtoupper($method);
             foreach (self::$routes[$method] as $route => $controllerAction) {
                 $pattern = preg_replace('/\{[^\}]+\}/', '([^/]+)', $route);
                 if (preg_match("#^$pattern$#", $url, $matches)) {
                     array_shift($matches);
+    
                     foreach ($controllerAction as $controller => $action) {
                         $controllerInstance = new $controller();
-                        return call_user_func_array([$controllerInstance, $action], $matches);
+                        $request = new Request();
+                        return call_user_func_array([$controllerInstance, $action], [$request]);
                     }
                 }
             }
-
+    
             require_once __DIR__ . '/../src/views/errors/404.php';
             return null;
         }

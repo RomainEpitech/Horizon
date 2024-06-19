@@ -57,8 +57,13 @@
         private function generateFormHtml($formConfig) {
             ob_start();
             ?>
-            <form action="" method="post">
-                <?php foreach ($formConfig['inputs'] as $input): ?>
+            <form
+                action="<?= $formConfig['form']['action'] ?? '' ?>"
+                method="<?= $formConfig['form']['method'] ?? 'post' ?>"
+                class="<?= $formConfig['form']['class'] ?? '' ?>"
+                id="<?= $formConfig['form']['id'] ?? '' ?>"
+            >
+                <?php foreach ($formConfig['form']['inputs'] as $input): ?>
                     <div class="form-group">
                         <?php if (isset($input['label'])): ?>
                             <label for="<?= $input['name'] ?>"><?= $input['label'] ?></label>
@@ -67,12 +72,24 @@
                             type="<?= $input['type'] ?>"
                             name="<?= $input['name'] ?>"
                             class="<?= $input['class'] ?>"
-                            <?php if ($input['type'] === 'submit'): ?>
-                                value="<?= $input['value'] ?>"
-                            <?php endif; ?>
+                            placeholder="<?= $input['placeholder'] ?? '' ?>"
+                            value="<?= $input['defaultValue'] ?? '' ?>"
                         />
                     </div>
                 <?php endforeach; ?>
+        
+                <?php if (isset($formConfig['form']['buttons'])): ?>
+                    <div class="form-group">
+                        <?php foreach ($formConfig['form']['buttons'] as $button): ?>
+                            <button
+                                type="<?= $button['type'] ?>"
+                                class="<?= $button['class'] ?>"
+                            >
+                                <?= $button['label'] ?>
+                            </button>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </form>
             <?php
             return ob_get_clean();
