@@ -18,3 +18,4 @@
 [2024-06-18 14:18:23][Migration] New version20240618121823 created.
 [2024-06-18 14:18:32][Entities] created and saved in core/entities
 [2024-06-18 14:18:32][Migration] Version20240618121823 executed.
+[2024-06-20 16:00:13][NewUser] romain.farinacci-berodias@epitech.eu registered successfully

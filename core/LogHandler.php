@@ -44,6 +44,16 @@
             file_put_contents($this->logFile, $message, FILE_APPEND);
         }
 
+        public function newUser($user) {
+            $message = "[$this->date][NewUser] $user registered successfully." . PHP_EOL;
+            file_put_contents($this->logFile, $message, FILE_APPEND);
+        }
+
+        public function failedNewUser($user) {
+            $message = "[$this->date][NewUser] $user failed to be registered." . PHP_EOL;
+            file_put_contents($this->logFile, $message, FILE_APPEND);
+        }
+
         public function log($message) {
             $logMessage = "[$this->date] $message" . PHP_EOL;
             file_put_contents($this->logFile, $logMessage, FILE_APPEND);

@@ -24,6 +24,12 @@
                             'label' => 'password',
                             'class' => 'form-control'
                         ],
+                        [
+                            'type' => 'password',
+                            'name' => 'confirm_password',
+                            'label' => 'password',
+                            'class' => 'form-control'
+                        ],
                     ],
                     'buttons' => [
                         [

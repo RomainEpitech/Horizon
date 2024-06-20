@@ -5,7 +5,8 @@
     use Exception;
     use Horizon\Core\Database\Database;
     use Horizon\Core\Entities\Users;
-    use Horizon\Core\Mystic\Mystic;
+use Horizon\Core\LogHandler;
+use Horizon\Core\Mystic\Mystic;
 
     class Auth {
         protected $db;
@@ -33,8 +34,12 @@
             $keys = array_keys($params);
 
             try {
-                return Mystic::insert(Users::class, $params);
+                Mystic::insert(Users::class, $params);
+                $log = new LogHandler();
+                $log->newUser($params['email']);
+                return true;
             } catch (Exception $e) {
+                $log->failedNewUser($params['email']);
                 throw new Exception("Failed to register user: " . $e->getMessage());
             }
         }
