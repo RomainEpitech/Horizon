@@ -20,7 +20,7 @@ use Horizon\Core\Mystic\Mystic;
         }
 
         public static function registerUser($params) {
-            if (!isset($params['password']) || !isset($params['confirm_password'])) {
+            if (!isset($params['password']) || !isset($params['confirm_password']) || empty($params['password']) || empty($params['confirm_password'])) {
                 throw new Exception("Password and Confirm Password fields are required.");
             }
             

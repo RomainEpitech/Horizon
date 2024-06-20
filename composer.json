@@ -7,6 +7,7 @@
             "Horizon\\Core\\Env\\": "core/env/",
             "Horizon\\Core\\Entities\\": "core/entities/",
             "Horizon\\Core\\Templating\\": "core/templating/",
+            "Horizon\\Core\\Errors\\": "core/errors/",
             "Horizon\\Core\\Mystic\\": "core/mystic/",
             "Horizon\\Core\\Database\\": "core/database/",
             "Horizon\\Core\\Commands\\": "core/commands/",
