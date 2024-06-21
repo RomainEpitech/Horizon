@@ -1,10 +1,16 @@
 {
   "name": "horizon",
   "version": "1.0.0",
-  "description": "",
+  "description": "./Horizon serv:run run Horizon server ./Horizon build:run guide you through Horizon set-up ./Horizon entities:make Fetch database for entities generation ./Horizon reset:run set back Horizon to default version ./Horizon log:clear empty the log.txt file ./Horizon controller:new [name]create a basic controller architecture ./Horizon form:create [name] create a basic form architecture ./Horizon migration:new create a basic migration architecture  ./Horizon migration:run Run the latest migration.",
   "main": "index.js",
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "postcss-cli": "^9.1.0",
+    "tailwindcss": "^3.4.3"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:css": "postcss core/tailwind/input.css -o core/tailwind/output.css"
   },
   "keywords": [],
   "author": "",

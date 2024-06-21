@@ -5,16 +5,26 @@
     class Lucid {
         public function render($template, $scope = []) {
             $templatePath = __DIR__ . "/../../src/views/layouts/" . $template . ".lucid.php";
+            $layoutPath = __DIR__ . "/../../src/views/index.php";
+            
             if (!file_exists($templatePath)) {
                 throw new \Exception("Template file not found: $templatePath");
             }
-
+    
             extract($scope);
             $content = file_get_contents($templatePath);
             $content = $this->parseTemplate($content, $scope);
-
+    
             ob_start();
             eval('?>' . $content);
+            $content = ob_get_clean();
+    
+            if (!file_exists($layoutPath)) {
+                throw new \Exception("Layout file not found: $layoutPath");
+            }
+    
+            ob_start();
+            include $layoutPath;
             return ob_get_clean();
         }
 

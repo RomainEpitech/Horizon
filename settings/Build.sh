@@ -16,6 +16,7 @@ function update_or_append() {
     fi
 }
 
+clear;
 echo "Start the database config ? (y/n)"
 read dbConfig
 
@@ -70,4 +71,4 @@ if [ "$dbConfig" = "y" ]; then
     echo "Database configuration saved to .env file."
     chmod +x settings/scripts/newDb.php
     php settings/scripts/newDb.php "$dbName" "$dbUser" "$dbPass" "$dbHost" "$dbPort" "$dbChar"
-fi
+fi 

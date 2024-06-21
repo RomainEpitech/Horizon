@@ -7,8 +7,20 @@
             $host = $params[0] ?? '127.0.0.1';
             $port = $params[1] ?? '8888';
             $docRoot = __DIR__ . '/../../../';
+    
+            echo "Compiling Tailwind CSS...\n";
+            $output = [];
+            $resultCode = 0;
+            exec('npm run build:css', $output, $resultCode);
             
-            echo "Starting server at \e[96mhttp://$host:$port\n\e[0m";
+            if ($resultCode !== 0) {
+                echo "Tailwind CSS compilation failed:\n";
+                echo implode("\n", $output);
+                return;
+            }
+    
+            echo "Tailwind CSS compiled successfully.\n";
+            echo "Starting server at http://$host:$port\n";
             passthru("php -S $host:$port -t $docRoot");
         }
     }
