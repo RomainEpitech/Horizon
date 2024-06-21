@@ -74,7 +74,7 @@
                 id="<?= $formConfig['form']['id'] ?? '' ?>"
             >
                 <?php foreach ($formConfig['form']['inputs'] as $input): ?>
-                    <div class="form-group">
+                    <div>
                         <?php if (isset($input['label'])): ?>
                             <label for="<?= $input['name'] ?>"><?= $input['label'] ?></label>
                         <?php endif; ?>
@@ -89,7 +89,7 @@
                 <?php endforeach; ?>
         
                 <?php if (isset($formConfig['form']['buttons'])): ?>
-                    <div class="form-group">
+                    <div>
                         <?php foreach ($formConfig['form']['buttons'] as $button): ?>
                             <button
                                 type="<?= $button['type'] ?>"
