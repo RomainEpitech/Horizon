@@ -23,22 +23,28 @@ use Horizon\Core\Mystic\Mystic;
             if (!isset($params['password']) || !isset($params['confirm_password']) || empty($params['password']) || empty($params['confirm_password'])) {
                 throw new Exception("Password and Confirm Password fields are required.");
             }
-            
+    
             if ($params['password'] !== $params['confirm_password']) {
                 throw new Exception("Passwords do not match.");
             }
-
+    
+            if (isset($params['email'])) {
+                $existingUser = Mystic::fetchOneBy(Users::class, ['email' => $params['email']]);
+                if ($existingUser) {
+                    throw new Exception("Email already exists.");
+                }
+            }
+    
             $params['password'] = self::hashPassword($params['password']);
             unset($params['confirm_password']);
-
-            $keys = array_keys($params);
-
+    
             try {
                 Mystic::insert(Users::class, $params);
                 $log = new LogHandler();
                 $log->newUser($params['email']);
                 return true;
             } catch (Exception $e) {
+                $log = new LogHandler();
                 $log->failedNewUser($params['email']);
                 throw new Exception("Failed to register user: " . $e->getMessage());
             }

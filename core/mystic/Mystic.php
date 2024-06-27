@@ -27,6 +27,27 @@
             }
         }
 
+        public static function fetchOneBy($entityClass, $conditions) {
+            $db = self::getInstance()->getConn();
+            
+            $reflection = new ReflectionClass($entityClass);
+            $tableName = $reflection->getStaticPropertyValue('tableName');
+    
+            $conditionString = implode(' AND ', array_map(function($key) {
+                return "$key = :$key";
+            }, array_keys($conditions)));
+    
+            $sql = "SELECT * FROM $tableName WHERE $conditionString LIMIT 1";
+            $stmt = $db->prepare($sql);
+    
+            try {
+                $stmt->execute($conditions);
+                return $stmt->fetchObject($entityClass);
+            } catch (PDOException $e) {
+                throw new Exception("SQL execution error: " . $e->getMessage());
+            }
+        }
+
         public static function insert($entityClass, $values) {
             $db = self::getInstance()->getConn();
     

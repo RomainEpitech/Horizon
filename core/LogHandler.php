@@ -7,7 +7,7 @@
         private $logFile;
         private $date;
 
-        public function __construct($logFile = __DIR__ . '/../logs/Log.txt', $date = null) {
+        public function __construct($logFile = __DIR__ . '/../logs/Log.log', $date = null) {
             EnvLoader::load('./.env');
             $timezone = EnvLoader::get('TIMEZONE');
             date_default_timezone_set($timezone);
