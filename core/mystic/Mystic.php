@@ -96,4 +96,30 @@
                 throw new Exception("SQL execution error: " . $e->getMessage());
             }
         }
+
+        public static function update($entityClass, $id, $values) {
+            $db = self::getInstance()->getConn();
+    
+            $reflection = new ReflectionClass($entityClass);
+            $tableName = $reflection->getStaticPropertyValue('tableName');
+    
+            $setClause = implode(", ", array_map(function ($key) {
+                return "$key = :$key";
+            }, array_keys($values)));
+    
+            $sql = "UPDATE $tableName SET $setClause WHERE id = :id";
+            $stmt = $db->prepare($sql);
+    
+            foreach ($values as $key => $value) {
+                $stmt->bindValue(':' . $key, $value);
+            }
+            $stmt->bindValue(':id', $id);
+    
+            try {
+                $stmt->execute();
+                return true;
+            } catch (PDOException $e) {
+                throw new Exception("SQL execution error: " . $e->getMessage());
+            }
+        }
     }

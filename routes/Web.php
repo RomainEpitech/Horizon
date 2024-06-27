@@ -6,3 +6,4 @@
 
     Router::get('/', [HomeController::class => 'index']);
     Router::post('/register', [RegisterController::class => 'index']);
+    Router::post('/login', [HomeController::class => 'login']);

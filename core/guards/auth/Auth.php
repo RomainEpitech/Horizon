@@ -5,8 +5,9 @@
     use Exception;
     use Horizon\Core\Database\Database;
     use Horizon\Core\Entities\Users;
+use Horizon\Core\Guards\Keys\Token;
 use Horizon\Core\LogHandler;
-use Horizon\Core\Mystic\Mystic;
+    use Horizon\Core\Mystic\Mystic;
 
     class Auth {
         protected $db;
@@ -48,5 +49,26 @@ use Horizon\Core\Mystic\Mystic;
                 $log->failedNewUser($params['email']);
                 throw new Exception("Failed to register user: " . $e->getMessage());
             }
+        }
+
+        public static function loginUser($params) {
+            if (!isset($params['email']) || !isset($params['password'])) {
+                throw new Exception("Email and Password fields are required.");
+            }
+    
+            $user = Mystic::fetchOneBy(Users::class, ['email' => $params['email']]);
+            if (!$user) {
+                throw new Exception("Invalid email or password.");
+            }
+    
+            if (!password_verify($params['password'], $user->password)) {
+                throw new Exception("Invalid email or password.");
+            }
+    
+            $newToken = Token::generateToken();
+            $user->token = $newToken;
+            Mystic::update(Users::class, $user->id, ['token' => $newToken]);
+    
+            return ['token' => $newToken, 'user' => $user];
         }
     }
