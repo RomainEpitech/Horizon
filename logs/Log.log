@@ -43,3 +43,4 @@
 [2024-07-03 12:18:51] New table `users` created
 [2024-07-03 12:19:01][Entities] Entities created and saved in core/entities
 [2024-07-03 12:19:21][NewUser] test@test.fr registered successfully.
+[2024-07-03 15:35:23][NewUser] test@test.fr registered successfully.

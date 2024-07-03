@@ -39,6 +39,10 @@
             $params['password'] = self::hashPassword($params['password']);
             unset($params['confirm_password']);
 
+            if (!isset($params['role'])) {
+                $params['role'] = json_encode(['User']);
+            }
+            
             $userClass = new ReflectionClass(Users::class);
             $validFields = array_map(function($property) {
                 return $property->getName();
