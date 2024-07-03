@@ -25,18 +25,20 @@
     
                 try {
                     $loginResponse = Auth::loginUser($params);
-                    echo "Login successful. Token: " . $loginResponse['token'];
+                    echo "Login successful. " . print_r($_SESSION['current_User']);
                 } catch (Exception $e) {
-                    // Handle login failure
                     echo $e->getMessage();
                 }
             } else {
-                // Display the login form
                 $loginForm = $this->renderForm(AccessForm::class);
                 $this->render("Login", ['loginForm' => $loginForm]);
             }
         }
         
+        public function verify() {
+            echo "success";
+        } 
+
         public function api() {
             echo "Welcome to api";
         }

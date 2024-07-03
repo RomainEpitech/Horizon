@@ -4,12 +4,22 @@
 
     use Horizon\Core\Database\Database;
     use Exception;
+    use Horizon\Core\Env\EnvLoader;
     use PDO;
     use PDOException;
     use ReflectionClass;
     use ReflectionProperty;
 
     class Mystic extends Database {
+
+        protected $timezone;
+        
+        public static function init() {
+            EnvLoader::load('./.env');
+            self::$timezone = EnvLoader::get('TIMEZONE');
+            date_default_timezone_set(self::$timezone);
+        }
+
         public static function fetchAll($entityClass) {
             $db = self::getInstance()->getConn();
             

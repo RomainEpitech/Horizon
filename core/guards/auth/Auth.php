@@ -5,9 +5,9 @@
     use Exception;
     use Horizon\Core\Database\Database;
     use Horizon\Core\Entities\Users;
-use Horizon\Core\Guards\Keys\Token;
-use Horizon\Core\LogHandler;
+    use Horizon\Core\LogHandler;
     use Horizon\Core\Mystic\Mystic;
+    use ReflectionClass;    
 
     class Auth {
         protected $db;
@@ -38,9 +38,22 @@ use Horizon\Core\LogHandler;
     
             $params['password'] = self::hashPassword($params['password']);
             unset($params['confirm_password']);
+
+            $userClass = new ReflectionClass(Users::class);
+            $validFields = array_map(function($property) {
+                return $property->getName();
+            }, $userClass->getProperties());
+    
+            $filteredParams = array_filter(
+                $params,
+                function($key) use ($validFields) {
+                    return in_array($key, $validFields);
+                },
+                ARRAY_FILTER_USE_KEY
+            );
     
             try {
-                Mystic::insert(Users::class, $params);
+                Mystic::insert(Users::class, $filteredParams);
                 $log = new LogHandler();
                 $log->newUser($params['email']);
                 return true;
@@ -64,11 +77,7 @@ use Horizon\Core\LogHandler;
             if (!password_verify($params['password'], $user->password)) {
                 throw new Exception("Invalid email or password.");
             }
-    
-            $newToken = Token::generateToken();
-            $user->token = $newToken;
-            Mystic::update(Users::class, $user->id, ['token' => $newToken]);
-    
-            return ['token' => $newToken, 'user' => $user];
+
+            $_SESSION['current_User'] = get_object_vars($user);
         }
     }

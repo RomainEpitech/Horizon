@@ -22,3 +22,24 @@
 [2024-06-20 16:29:28][NewUser] romain.farinacci-berodias@epitech.eu registered successfully.
 [2024-06-27 14:57:08][NewUser] romain.farinacci-berodias@epitech.eu registered successfully.
 [2024-06-27 15:29:45][Form] access Form created successfully
+[2024-06-28 11:32:02][NewUser] test@test.fr registered successfully.
+[2024-06-28 14:54:25][NewUser] test@test.fr failed to be registered.
+[2024-06-28 14:55:44][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:01:01][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:01:36][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:03:58][NewUser] test@test.fr registered successfully.
+[2024-06-28 15:31:34][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:32:00][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:32:38][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:44:04][NewUser] test@test.fr failed to be registered.
+[2024-06-28 15:59:49][NewUser] test@test.fr failed to be registered.
+[2024-06-28 16:01:35][NewUser] test@test.fr registered successfully.
+[2024-07-03 11:22:36][NewUser] randy.black@ore.com registered successfully.
+[2024-07-03 12:18:24] New database `host` created
+[2024-07-03 12:18:24] New table `migrations` created
+[2024-07-03 12:18:24] New table `users` created
+[2024-07-03 12:18:51] New database `host` created
+[2024-07-03 12:18:51] New table `migrations` created
+[2024-07-03 12:18:51] New table `users` created
+[2024-07-03 12:19:01][Entities] Entities created and saved in core/entities
+[2024-07-03 12:19:21][NewUser] test@test.fr registered successfully.

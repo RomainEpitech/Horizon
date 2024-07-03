@@ -15,8 +15,6 @@
 
         public $created_at;
 
-        public $token;
-
         public $role;
 
         public function getId() {
@@ -49,14 +47,6 @@
 
         public function setCreated_at($created_at) {
             $this->created_at = $created_at;
-        }
-
-        public function getToken() {
-            return $this->token;
-        }
-
-        public function setToken($token) {
-            $this->token = $token;
         }
 
         public function getRole() {

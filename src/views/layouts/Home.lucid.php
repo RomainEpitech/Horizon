@@ -9,3 +9,7 @@ Welcome to homepage
 {@foreach ($migration as $m)}
     <li>{{ $m->migration, $m->executed_at }}</li>
 {@endforeach}
+
+<a href="/log">log</a>
+
+<?php var_dump($_SESSION['current_User']);?>

@@ -51,7 +51,6 @@
                 `email` VARCHAR(255) NOT NULL,
                 `password` VARCHAR(255) NOT NULL,
                 `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP,
-                `token` VARCHAR(255),
                 `role` JSON
             )";
         $pdo->exec($sql);
