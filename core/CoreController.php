@@ -19,4 +19,8 @@
         protected function renderForm($formClass) {
             return $this->lucid->renderForm($formClass);
         }
+
+        protected function renderAdmin($view, $scope = []) {
+            echo $this->lucid->renderAdmin($view, $scope);
+        }
     }

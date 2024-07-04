@@ -18,6 +18,8 @@
             "Horizon\\Core\\Guards\\Middleware\\": "core/guards/middleware/",
             "Horizon\\Core\\Guards\\Keys\\": "core/guards/keys/",
 
+            "Horizon\\Core\\Admin\\Controller\\" : "core/admin/controller",
+
             "Horizon\\Src\\": "src/",
             "Horizon\\Src\\Views\\Forms\\": "src/views/forms/"
         }
