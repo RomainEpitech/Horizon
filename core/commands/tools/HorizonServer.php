@@ -63,7 +63,26 @@
                 }
 
                 echo "\r" . $colorGreen . "Tailwind: " . str_repeat("#", $progressBarLength) . " $timeElapsed" . "s" . $colorReset . "\n";
-                echo "Starting server at http://$host:$port\n";
+
+                echo "\033[2J\033[H";
+
+                $horizon = "
+\033[31m _   _    ___    ____    ___    ____    ___    _   _
+\033[33m| | | |  / _ \\  |  _ \\  |_ _|  |__  |  / _ \\  | \\ | |
+\033[32m| |_| | | | | | | (_) |  | |     / /  | | | | |  \\| |
+\033[36m|  _  | | | | | |  _ /   | |    / /   | | | | | .   |
+\033[34m| | | | | |_| | | | \\ \\  | |   / /_   | |_| | | |\\  |
+\033[35m|_| |_|  \\___/  |_|  \\_\\|___| |____|   \\___/  |_| \\_|
+\033[0m
+";
+                echo $horizon;
+
+                $serverUrl = "$colorGreen" . "┌" . str_repeat("─", strlen(" Starting server at http://$host:$port ")) . "┐\n";
+                $serverUrl .= "│ Starting server at http://$host:$port │\n";
+                $serverUrl .= "└" . str_repeat("─", strlen(" Starting server at http://$host:$port ")) . "┘$colorReset\n";
+
+                echo $serverUrl;
+
                 passthru("php -S $host:$port -t $docRoot");
             } else {
                 echo "Failed to start the Tailwind CSS compilation process.";
