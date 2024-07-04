@@ -16,7 +16,7 @@
             $loginForm = $this->renderForm(LoginForm::class);
             $accessForm = $this->renderForm(AccessForm::class);
             $migrationInstance = Mystic::fetchAll(Migrations::class);
-            $this->render("Home", ['loginForm' => $loginForm, 'migration' => $migrationInstance, 'accessForm' => $accessForm]);
+            $this->render("Home");
         }
 
         public function login(Request $request) {
