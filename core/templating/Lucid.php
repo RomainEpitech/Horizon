@@ -71,6 +71,31 @@
             $content = preg_replace('/\{@elseif\s*\((.+?)\)\s*\}/', '<?php elseif($1): ?>', $content);
             $content = preg_replace('/\{@else\s*\}/', '<?php else: ?>', $content);
             $content = preg_replace('/\{@endif\s*\}/', '<?php endif; ?>', $content);
+
+            // replace {@includs ''} with requires
+            $content = preg_replace_callback('/\{@include\s*\'(.+?)\'\}/', function($matches) use ($scope) {
+                $filename = $matches[1];
+                $filePath = __DIR__ . "/../../src/views/layouts/components/" . $filename . ".lucid.php";
+        
+                if (!file_exists($filePath)) {
+                    throw new \Exception("Included file not found: $filePath");
+                }
+        
+                $includedContent = file_get_contents($filePath);
+                return $this->parseTemplate($includedContent, $scope);
+            }, $content);
+
+            $content = preg_replace_callback('/\{@AdminInclude\s*\'(.+?)\'\}/', function($matches) use ($scope) {
+                $filename = $matches[1];
+                $filePath = __DIR__ . "/../../core/admin/views/layouts/components/" . $filename . ".lucid.php";
+        
+                if (!file_exists($filePath)) {
+                    throw new \Exception("Included file not found: $filePath");
+                }
+        
+                $includedContent = file_get_contents($filePath);
+                return $this->parseTemplate($includedContent, $scope);
+            }, $content);
     
             return $content;
         }
