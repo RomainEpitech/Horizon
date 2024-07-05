@@ -19,6 +19,7 @@
             "Horizon\\Core\\Guards\\Keys\\": "core/guards/keys/",
 
             "Horizon\\Core\\Admin\\Controller\\" : "core/admin/controller",
+            "Horizon\\Core\\Admin\\GraphQl\\" : "core/admin/graphql",
 
             "Horizon\\Src\\": "src/",
             "Horizon\\Src\\Views\\Forms\\": "src/views/forms/"
@@ -30,5 +31,7 @@
             "email": "romain.farinacci@hotmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "webonyx/graphql-php": "^15.12"
+    }
 }
