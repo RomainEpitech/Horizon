@@ -7,6 +7,7 @@
     class AdminDashboardController extends CoreController {
 
         public function index() {
-            $this->renderAdmin("Dashboard");
+            $user = $_SESSION['current_User'];
+            $this->renderAdmin("Dashboard", ['user' => $user]);
         }
     }
