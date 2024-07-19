@@ -6,7 +6,6 @@
 
     class Migrations extends Mystic {
         protected static $tableName = 'Migrations';
-
         public $id;
 
         public $migration;
