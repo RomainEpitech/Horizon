@@ -1,5 +1,6 @@
 <?php
 
     use Horizon\Core\Router\Routes;
+    use Horizon\Src\Controllers\HomeController;
 
-    // Routes::get('/');
+    Routes::get('/', [HomeController::class => 'renderHome']);

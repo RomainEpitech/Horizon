@@ -4,9 +4,9 @@
 
     use Horizon\Core\Database\Database;
     use Horizon\Core\Env\EnvLoader;
+    use Horizon\Core\Router\Routes;
 
     class Core {
-
         public function run() {
             $loader = new EnvLoader();
             $loader->load();
@@ -20,6 +20,10 @@
                 Database::run();
             }
 
-            echo "it is running " . $_ENV['APP_NAME'];
+            Routes::init();
+            Routes::dispatch(
+                $_SERVER['REQUEST_METHOD'],
+                parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
+            );
         }
     }

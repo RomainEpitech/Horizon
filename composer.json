@@ -8,7 +8,11 @@
             "Horizon\\Core\\Env\\": "core/env/",
             "Horizon\\Core\\Database\\": "core/database/",
             "Horizon\\Core\\Commands\\": "core/commands/",
-            "Horizon\\Core\\Inc\\": "core/inc/"
+            "Horizon\\Core\\Inc\\": "core/inc/",
+            "Horizon\\Core\\Router\\": "core/router/",
+            "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",
+
+            "Horizon\\Src\\Controllers\\": "src/controllers/"
         }
     },
     "authors": [

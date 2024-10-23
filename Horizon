@@ -1,9 +1,13 @@
 #!/usr/bin/env php
 <?php
 
-    use Horizon\Core\Core;
-
     require __DIR__ . '/vendor/autoload.php';
 
-    $core = new Core;
-    $core->run();
+    use Horizon\Core\Commands\CommandHandler;
+
+    $commandHandler = new CommandHandler();
+
+    $command = $argv[1] ?? 'help';
+    $params = array_slice($argv, 2);
+
+    $commandHandler->handle($command, $params);

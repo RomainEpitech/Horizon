@@ -23,9 +23,9 @@ class Routes {
     public static function init(): void {
         self::$routerType = strtoupper($_ENV['ROUTER_TYPE']);
         if (self::$routerType === 'API') {
-            require_once __DIR__ . '/../routes/api/api.php';
+            require_once './routes/api/api.php';
         } else {
-            require_once __DIR__ . '/../routes/web.php';
+            require_once './routes/web.php';
         }
     }
 
