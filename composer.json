@@ -6,7 +6,9 @@
         "psr-4": {
             "Horizon\\Core\\": "core/",
             "Horizon\\Core\\Env\\": "core/env/",
-            "Horizon\\Core\\Database\\": "core/database/"
+            "Horizon\\Core\\Database\\": "core/database/",
+            "Horizon\\Core\\Commands\\": "core/commands/",
+            "Horizon\\Core\\Inc\\": "core/inc/"
         }
     },
     "authors": [

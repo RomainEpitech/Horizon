@@ -18,7 +18,6 @@
 
             if ($dbConnect) {
                 Database::run();
-                echo "connected";
             }
 
             echo "it is running " . $_ENV['APP_NAME'];
