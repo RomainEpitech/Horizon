@@ -1,0 +1,20 @@
+{
+    "name": "saskoue/horizon",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Horizon\\Core\\": "core/",
+            "Horizon\\Core\\Env\\": "core/env/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Saskoue",
+            "email": "romain.farinacci@hotmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    }
+}
