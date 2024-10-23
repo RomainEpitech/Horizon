@@ -21,7 +21,7 @@
         public function load(): bool 
         {
             if (!file_exists($this->envPath)) {
-                throw new Exception("Le fichier .env n'existe pas: {$this->envPath}");
+                throw new Exception(".env file not found for uri: {$this->envPath}");
             }
 
             $lines = file($this->envPath, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
@@ -37,7 +37,7 @@
                     if (isset($this->loadedVariables[$name])) {
                         throw new Exception(
                             sprintf(
-                                "Variable d'environnement dupliquée '%s' détectée à la ligne %d. Précédemment définie à la ligne %d.",
+                                "Duplicated variables entry.",
                                 $name,
                                 $lineNumber + 1,
                                 $this->loadedVariables[$name]['line']
