@@ -5,7 +5,8 @@
     "autoload": {
         "psr-4": {
             "Horizon\\Core\\": "core/",
-            "Horizon\\Core\\Env\\": "core/env/"
+            "Horizon\\Core\\Env\\": "core/env/",
+            "Horizon\\Core\\Database\\": "core/database/"
         }
     },
     "authors": [
