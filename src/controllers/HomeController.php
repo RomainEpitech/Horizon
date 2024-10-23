@@ -2,8 +2,10 @@
 
     namespace Horizon\Src\Controllers;
 
-    class HomeController {
+use Horizon\Core\CoreController;
+
+    class HomeController extends CoreController {
         public function renderHome() {
-            echo "hello world";
+            $this->render("Home");
         }
     }
