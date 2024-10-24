@@ -14,4 +14,8 @@
         protected function render($view, $scope = []) {
             echo $this->lucid->render($view, $scope);
         }
+
+        protected function renderMain($view, $scope = []) {
+            echo $this->lucid->renderMain($view, $scope);
+        }
     }
