@@ -9,6 +9,7 @@
     use Horizon\Core\Inc\Error;
     use PDO;
     use Exception;
+use Horizon\Core\Logs\Log;
 
     class HorizonMigration extends CommandHandler {
         private $db;
@@ -56,8 +57,10 @@
 
                 file_put_contents($filePath, $migrationTemplate);
                 Success::displaySuccessMessage("New migration created: Version{$className}.php");
+                Log::info("New migration " . $className . " created successfully.");
             } catch (Exception $e) {
                 Error::displayErrorMessage("Failed to create migration: " . $e->getMessage());
+                Log::alert("Failed to create migration " . $className);
                 exit(1);
             }
         }
