@@ -19,6 +19,14 @@
             self::log('DANGER', $message);
         }
 
+        public static function success(string $message): void {
+            self::log('SUCCESS', $message);
+        }
+
+        public static function error(string $message): void {
+            self::log('ERROR', $message);
+        }
+
         private static function log(string $level, string $message): void {
             try {
                 $timestamp = date('Y-m-d H:i:s');

@@ -9,7 +9,7 @@
     use Horizon\Core\Inc\Error;
     use PDO;
     use Exception;
-use Horizon\Core\Logs\Log;
+    use Horizon\Core\Logs\Log;
 
     class HorizonMigration extends CommandHandler {
         private $db;
@@ -115,14 +115,17 @@ use Horizon\Core\Logs\Log;
                         $this->logMigration($migrationName);
                         $pdo->commit();
                         Success::displaySuccessMessage("Migration $className executed successfully.");
+                        Log::success("Migration " . $className . " ran successfully.");
                     } catch (Exception $e) {
                         $pdo->rollBack();
                         Error::displayErrorMessage("Failed to execute migration $className: " . $e->getMessage());
+                        Log::error("Failed to run migration " . $className);
                     }
                 }
     
             } catch (Exception $e) {
                 Error::displayErrorMessage("Migration error: " . $e->getMessage());
+                Log::error("Error running migration " . $e->getMessage());
                 exit(1);
             }
         }
