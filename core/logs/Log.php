@@ -3,6 +3,7 @@
     namespace Horizon\Core\Logs;
 
     use Exception;
+use Horizon\Core\Inc\Error;
 
     class Log {
         private const LOG_FILE = '/storage/logs/Horizon.log';
@@ -25,6 +26,10 @@
 
         public static function error(string $message): void {
             self::log('ERROR', $message);
+        }
+
+        public static function test(string $message): void {
+            self::log('TEST', $message);
         }
 
         private static function log(string $level, string $message): void {
@@ -82,6 +87,25 @@
                 rename($logFile, $archive);
                 touch($logFile);
                 chmod($logFile, 0666);
+            }
+        }
+
+        public static function orderByStatus(string $status): void {
+            $logs = self::getLogs();
+            $filteredLogs = [];
+    
+            foreach ($logs as $log) {
+                if (strpos($log, "[$status]") !== false) {
+                    $filteredLogs[] = $log;
+                }
+            }
+    
+            if (empty($filteredLogs)) {
+                Error::displayErrorMessage("No log found for level: " . $status);
+            } else {
+                foreach ($filteredLogs as $log) {
+                    echo $log . PHP_EOL;
+                }
             }
         }
     }
