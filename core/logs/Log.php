@@ -78,6 +78,11 @@ use Horizon\Core\Inc\Error;
             return file($logFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
         }
 
+        public static function showLogs(): void {
+            $logFile = dirname(__DIR__, 2) . '/storage/logs/Horizon.log';
+            echo file_get_contents($logFile);
+        }        
+
         private static function checkLogRotation(): void {
             $logFile = dirname(__DIR__, 2) . '/storage/logs/Horizon.log';
             $maxSize = 5 * 1024 * 1024; // 5 MB

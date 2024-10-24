@@ -5,8 +5,8 @@
 
     use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
-use Horizon\Core\Inc\Error;
-use Horizon\Core\Inc\success;
+    use Horizon\Core\Inc\Error;
+    use Horizon\Core\Inc\success;
     use Horizon\Core\Logs\Log;
 
     class CommandHandler {
@@ -32,6 +32,9 @@ use Horizon\Core\Inc\success;
                 case 'logs:clear':
                     Log::clear();
                     success::displaySuccessMessage("Log file cleared.");
+                    break;
+                case 'logs:show':
+                    Log::showLogs();
                     break;
                 case 'logs:filter':
                     if (empty($params[0])) {
