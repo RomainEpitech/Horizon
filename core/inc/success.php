@@ -3,7 +3,7 @@
     namespace Horizon\Core\Inc;
 
     class success {
-        protected function displaySuccessMessage($message) {
+        static public function displaySuccessMessage($message) {
             $greenBackground = "\033[42m";
             $blackText = "\033[30m";
             $reset = "\033[0m";

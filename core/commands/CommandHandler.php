@@ -1,11 +1,10 @@
 <?php
 
     namespace Horizon\Core\Commands;
+    require './vendor/autoload.php';
 
     use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
-
-    require './vendor/autoload.php';
 
     class CommandHandler {
         public function handle($command, $params) {
@@ -17,6 +16,10 @@
                 case 'migration:new':
                     $newMigration = new HorizonMigration();
                     $newMigration->newMigration();
+                    break;
+                case 'migration:run':
+                    $runMigration = new HorizonMigration();
+                    $runMigration->makeMigration();
                     break;
             }
         }
