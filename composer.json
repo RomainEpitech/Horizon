@@ -12,6 +12,7 @@
             "Horizon\\Core\\Router\\": "core/router/",
             "Horizon\\Core\\Lucid\\": "core/lucid/",
             "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",
+            "Horizon\\Core\\Commands\\Migrations\\": "core/commands/migrations/",
 
             "Horizon\\Src\\Controllers\\": "src/controllers/"
         }
