@@ -15,7 +15,9 @@
             "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",
             "Horizon\\Core\\Commands\\Migrations\\": "core/commands/migrations/",
 
-            "Horizon\\Src\\Controllers\\": "src/controllers/"
+            "Horizon\\Src\\Controllers\\": "src/controllers/",
+
+            "Horizon\\Migrations": "migrations/"
         }
     },
     "authors": [

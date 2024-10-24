@@ -1,0 +1,10 @@
+[2024-10-24 16:00:21][INFO] New migration Version20241024160021User created successfully.
+[2024-10-24 16:02:01][ERROR] Error running migration There is no active transaction
+[2024-10-24 16:04:57][INFO] New migration Version20241024160457User created successfully.
+[2024-10-24 16:09:29][INFO] New migration Version20241024160929User created successfully.
+[2024-10-24 16:09:51][ERROR] Failed to run migration Version20241024160929User: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'users' already exists
+[2024-10-24 16:10:00][ERROR] Error running migration: There is no active transaction
+[2024-10-24 16:10:17][ERROR] Failed to run migration Version20241024160929User: SQLSTATE[42S01]: Base table or view already exists: 1050 Table '_users' already exists
+[2024-10-24 16:10:39][ERROR] Error running migration: There is no active transaction
+[2024-10-24 16:11:57][ERROR] Failed to run migration Version20241024160929User: There is no active transaction
+[2024-10-24 16:13:11][SUCCESS] Migration Version20241024160929User ran successfully.
