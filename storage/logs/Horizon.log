@@ -8,3 +8,6 @@
 [2024-10-24 16:10:39][ERROR] Error running migration: There is no active transaction
 [2024-10-24 16:11:57][ERROR] Failed to run migration Version20241024160929User: There is no active transaction
 [2024-10-24 16:13:11][SUCCESS] Migration Version20241024160929User ran successfully.
+[2024-10-24 16:20:02][SUCCESS] Migration Version20241024160929User reverted successfully.
+[2024-10-24 16:20:12][SUCCESS] Migration Version20241024160929User ran successfully.
+[2024-10-24 16:20:18][SUCCESS] Migration Version20241024160929User reverted successfully.

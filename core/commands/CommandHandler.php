@@ -27,6 +27,11 @@
                     $runMigration = new HorizonMigration();
                     $runMigration->makeMigration();
                     break;
+                case 'migration:revert':
+                    $revertMigration = new HorizonMigration();
+                    $migrationName = isset($args[1]) ? $args[1] : null;
+                    $revertMigration->revertMigration($migrationName);
+                    break;
 
                 // LOGGING
                 case 'logs:clear':

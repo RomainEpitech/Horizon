@@ -9,8 +9,8 @@
     use Horizon\Core\Inc\Error;
     use PDO;
     use Exception;
-use Horizon\Core\Commands\Migrations\Schema;
-use Horizon\Core\Logs\Log;
+    use Horizon\Core\Commands\Migrations\Schema;
+    use Horizon\Core\Logs\Log;
 
     class HorizonMigration extends CommandHandler {
         private $db;
@@ -215,5 +215,98 @@ use Horizon\Core\Logs\Log;
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM migrations WHERE migration = :migration");
             $stmt->execute(['migration' => $migrationName]);
             return $stmt->fetchColumn() > 0;
+        }
+
+        public function revertMigration(?string $version = null): void {
+            try {
+                $pdo = $this->db->getConn();
+                Schema::setPdo($pdo);
+        
+                if (!$this->confirmRevert($version)) {
+                    Error::displayErrorMessage("Operation cancelled.");
+                    return;
+                }
+        
+                if ($version) {
+                    $this->revertSingleMigration($version);
+                } else {
+                    $this->revertLastMigration();
+                }
+        
+            } catch (\Exception $e) {
+                Error::displayErrorMessage("Revert error: " . $e->getMessage());
+                Log::error("Error reverting migration: " . $e->getMessage());
+            }
+        }
+        
+        private function confirmRevert(?string $version): bool {
+            $migrationText = $version ?? "the last migration";
+            echo "\033[33m";
+            echo "⚠️  Warning: You are about to revert {$migrationText}.\n";
+            echo "This operation might result in data loss.\n";
+            echo "\033[0m";
+            
+            echo "Are you sure you want to continue? [y/N]: ";
+            $handle = fopen("php://stdin", "r");
+            $line = fgets($handle);
+            fclose($handle);
+            
+            return strtolower(trim($line)) === 'y';
+        }
+        
+        private function revertLastMigration(): void {
+            $pdo = $this->db->getConn();
+            
+            $stmt = $pdo->query("SELECT migration FROM migrations ORDER BY id DESC LIMIT 1");
+            $lastMigration = $stmt->fetchColumn();
+            
+            if (!$lastMigration) {
+                Success::displaySuccessMessage("No migrations to revert.");
+                return;
+            }
+            
+            $this->revertSingleMigration($lastMigration);
+        }
+        
+        private function revertSingleMigration(string $version): void {
+            $migrationDir = './migrations';
+            $migrationFile = $migrationDir . '/' . $version . '.php';
+        
+            if (!$this->migrationExists($version)) {
+                Error::displayErrorMessage("Migration $version not found in the database.");
+                return;
+            }
+
+            if (!file_exists($migrationFile)) {
+                Error::displayErrorMessage("Migration file not found: $version.php");
+                return;
+            }
+        
+            require_once $migrationFile;
+            $fullClassName = "\\Migrations\\{$version}";
+        
+            if (!class_exists($fullClassName)) {
+                Error::displayErrorMessage("Migration class $fullClassName not found.");
+                return;
+            }
+        
+            try {
+                $migration = new $fullClassName($this->db->getConn());
+                $migration->down();
+                $this->removeMigrationFromLog($version);
+                
+                Success::displaySuccessMessage("Migration $version reverted successfully.");
+                Log::success("Migration $version reverted successfully.");
+                
+            } catch (\Exception $e) {
+                Error::displayErrorMessage("Failed to revert migration $version: " . $e->getMessage());
+                Log::error("Failed to revert migration $version: " . $e->getMessage());
+            }
+        }
+        
+        private function removeMigrationFromLog(string $migration): void {
+            $pdo = $this->db->getConn();
+            $stmt = $pdo->prepare("DELETE FROM migrations WHERE migration = :migration");
+            $stmt->execute(['migration' => $migration]);
         }
     }
