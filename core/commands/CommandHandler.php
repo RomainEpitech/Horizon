@@ -15,7 +15,8 @@
                     break;
                 case 'migration:new':
                     $newMigration = new HorizonMigration();
-                    $newMigration->newMigration();
+                    $migrationName = $params[0] ?? null;
+                    $newMigration->newMigration($migrationName);
                     break;
                 case 'migration:run':
                     $runMigration = new HorizonMigration();

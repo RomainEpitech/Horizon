@@ -41,18 +41,21 @@
             }
         }
 
-        public function newMigration() {
+        public function newMigration(?string $name = null) {
             try {
                 $timestamp = date('YmdHis');
-                $filePath = __DIR__ . "/../../../migrations/Version{$timestamp}.php";
-                $migrationTemplate = "<?php\n\n    use Horizon\Core\Commands\Migrations\AbstractMigration;\n\n    class Version{$timestamp} extends AbstractMigration {\n\n        public function up() {\n            //\n        }\n\n        public function down() {\n            //\n        }\n    }";
+                $className = $name 
+                    ? 'Version' . $timestamp . ucfirst($name)
+                    : 'Version' . $timestamp;
+                $filePath = __DIR__ . "/../../../migrations/{$className}.php";
+                $migrationTemplate = "<?php\n\n    use Horizon\Core\Commands\Migrations\AbstractMigration;\n\n    class {$className} extends AbstractMigration {\n\n        public function up() {\n            //\n        }\n\n        public function down() {\n            //\n        }\n    }";
 
                 if (!file_exists(dirname($filePath))) {
                     mkdir(dirname($filePath), 0777, true);
                 }
 
                 file_put_contents($filePath, $migrationTemplate);
-                Success::displaySuccessMessage("New migration created: Version{$timestamp}.php");
+                Success::displaySuccessMessage("New migration created: Version{$className}.php");
             } catch (Exception $e) {
                 Error::displayErrorMessage("Failed to create migration: " . $e->getMessage());
                 exit(1);
