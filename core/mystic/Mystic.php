@@ -5,6 +5,7 @@
     use Exception;
     use Horizon\Core\Database\Database;
     use Horizon\Core\Env\EnvLoader;
+    use Horizon\Core\Mystic\Queries\Table;
     use PDO;
 
     class Mystic {
@@ -25,10 +26,6 @@
             }
         }
 
-        protected function getConnection(): PDO {
-            return $this->pdo;
-        }
-
         protected static function getTableName(): string {
             $instance = new (get_called_class())();
             if (property_exists($instance, 'table')) {
@@ -41,60 +38,46 @@
 
         /**
          * Retourne toutes les entrées de la table en JSON
-         * @return string
+         * @return string JSON
          */
-        public static function findAll(): string {
-            try {
-                $pdo = Database::run()->getConn();
-                $table = static::getTableName();
-                
-                $stmt = $pdo->prepare("SELECT * FROM {$table}");
-                $stmt->execute();
-                
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                
-                return json_encode($results, JSON_THROW_ON_ERROR);
-            } catch (Exception $e) {
-                throw new Exception("Error in findAll(): " . $e->getMessage());
-            }
+        public static function all(): string {
+            $table = new Table(
+                Database::run()->getConn(),
+                static::getTableName(),
+                get_called_class()
+            );
+            return $table->get();
         }
 
         /**
-         * Retourne toutes les entrées de la table sous forme d'instances du modèle
-         * @return array
+         * Recherche par critères
+         * @param array $criteria
+         * @return Table
          */
-        public static function all(): array {
-            try {
-                $pdo = Database::run()->getConn();
-                $table = static::getTableName();
-                $className = get_called_class();
-                
-                $stmt = $pdo->prepare("SELECT * FROM {$table}");
-                $stmt->execute();
-                
-                $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                $instances = [];
-                
-                foreach ($results as $result) {
-                    $instance = new $className();
-                    foreach ($result as $key => $value) {
-                        $setter = 'set' . str_replace('_', '', ucwords($key, '_'));
-                        if (method_exists($instance, $setter)) {
-                            if ($key === 'created_at' && $value !== null) {
-                                $value = new \DateTime($value);
-                            }
-                            if ($key === 'role' && is_string($value)) {
-                                $value = json_decode($value, true);
-                            }
-                            $instance->$setter($value);
-                        }
-                    }
-                    $instances[] = $instance;
-                }
-                
-                return $instances;
-            } catch (Exception $e) {
-                throw new Exception("Error in all(): " . $e->getMessage());
-            }
+        public static function findBy(array $criteria): Table {
+            $table = new Table(
+                Database::run()->getConn(),
+                static::getTableName(),
+                get_called_class()
+            );
+            return $table->where($criteria);
+        }
+
+        /**
+         * Recherche tous les enregistrements correspondant aux critères
+         * @param array $criteria
+         * @return string JSON
+         */
+        public static function findAllBy(array $criteria): string {
+            return static::findBy($criteria)->get();
+        }
+
+        /**
+         * Trouve un seul enregistrement correspondant aux critères
+         * @param array $criteria
+         * @return string JSON
+         */
+        public static function findOneBy(array $criteria): string {
+            return static::findBy($criteria)->first();
         }
     }
