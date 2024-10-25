@@ -5,7 +5,7 @@
     class Lucid {
         public function render($template, $scope = []) {
             $templatePath = __DIR__ . "/../../src/views/layouts/" . $template . ".lucid.php";
-            $layoutPath = __DIR__ . "/../../src/views/index.php";
+            $layoutPath = __DIR__ . "/../../src/views/Index.php";
             
             if (!file_exists($templatePath)) {
                 throw new \Exception("Template file not found: $templatePath");
@@ -30,7 +30,7 @@
 
         public function renderMain($template, $scope = []) {
             $templatePath = __DIR__ . "/../../core/views/" . $template . ".lucid.php";
-            $layoutPath = __DIR__ . "/../../src/views/index.php";
+            $layoutPath = __DIR__ . "/../../src/views/Index.php";
             
             if (!file_exists($templatePath)) {
                 throw new \Exception("Template file not found: $templatePath");

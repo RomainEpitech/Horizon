@@ -1,6 +1,6 @@
 <?php
 
-    namespace Horizon\Src\Controllers;
+    namespace Horizon\App\Controllers;
 
     use Horizon\Core\CoreController;
 
