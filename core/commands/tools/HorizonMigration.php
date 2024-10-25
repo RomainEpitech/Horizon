@@ -54,7 +54,7 @@
                 $migrationTemplate = <<<PHP
         <?php
         
-        namespace Migrations;
+        namespace Horizon\\Database\\Migrations;
         
         use Horizon\Core\Commands\Migrations\AbstractMigration;
         use Horizon\Core\Commands\Migrations\Schema;
@@ -115,7 +115,7 @@
         
                 foreach ($pendingMigrations as $migrationFile) {
                     $className = pathinfo($migrationFile, PATHINFO_FILENAME);
-                    $fullClassName = "\\Migrations\\{$className}";
+                    $fullClassName = "Horizon\\Database\\Migrations\\{$className}";
                     $migrationPath = $migrationDir . '/' . $migrationFile;
         
                     if (!file_exists($migrationPath)) {
@@ -283,7 +283,7 @@
             }
         
             require_once $migrationFile;
-            $fullClassName = "\\Migrations\\{$version}";
+            $fullClassName = "Horizon\\Database\\Migrations\\{$version}";
         
             if (!class_exists($fullClassName)) {
                 Error::displayErrorMessage("Migration class $fullClassName not found.");

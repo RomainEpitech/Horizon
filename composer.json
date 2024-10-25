@@ -17,7 +17,7 @@
 
             "Horizon\\App\\Controllers\\": "app/controllers/",
 
-            "Horizon\\Migrations\\": "migrations/"
+            "Horizon\\Database\\Migrations\\": "database/migrations/"
         }
     },
     "authors": [

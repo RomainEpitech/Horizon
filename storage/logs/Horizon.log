@@ -14,3 +14,6 @@
 [2024-10-25 10:57:59][INFO] New migration Version20241025105759 created successfully.
 [2024-10-25 11:00:00][SUCCESS] Migration Version20241025105759 ran successfully.
 [2024-10-25 11:00:20][SUCCESS] Migration Version20241025105759 reverted successfully.
+[2024-10-25 11:02:11][INFO] New migration Version20241025110211Quotes created successfully.
+[2024-10-25 11:03:42][SUCCESS] Migration Version20241025110211Quotes ran successfully.
+[2024-10-25 11:04:50][SUCCESS] Migration Version20241025110211Quotes reverted successfully.
