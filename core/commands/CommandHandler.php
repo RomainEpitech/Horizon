@@ -3,7 +3,8 @@
     namespace Horizon\Core\Commands;
     require './vendor/autoload.php';
 
-    use Horizon\Core\Commands\Tools\HorizonMigration;
+use Horizon\Core\Commands\Tools\HorizonEntityGenerator;
+use Horizon\Core\Commands\Tools\HorizonMigration;
     use Horizon\Core\Commands\Tools\HorizonServer;
     use Horizon\Core\Inc\Error;
     use Horizon\Core\Inc\success;
@@ -48,6 +49,12 @@
                     }
                     $logLevel = strtoupper($params[0]);
                     Log::orderByStatus($logLevel);
+                    break;
+                
+                // ENTITES
+                case 'entity:make':
+                    $generator = new HorizonEntityGenerator();
+                    $generator->generate();
                     break;
             }
         }
