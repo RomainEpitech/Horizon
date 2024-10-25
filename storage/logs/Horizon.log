@@ -11,3 +11,6 @@
 [2024-10-24 16:20:02][SUCCESS] Migration Version20241024160929User reverted successfully.
 [2024-10-24 16:20:12][SUCCESS] Migration Version20241024160929User ran successfully.
 [2024-10-24 16:20:18][SUCCESS] Migration Version20241024160929User reverted successfully.
+[2024-10-25 10:57:59][INFO] New migration Version20241025105759 created successfully.
+[2024-10-25 11:00:00][SUCCESS] Migration Version20241025105759 ran successfully.
+[2024-10-25 11:00:20][SUCCESS] Migration Version20241025105759 reverted successfully.

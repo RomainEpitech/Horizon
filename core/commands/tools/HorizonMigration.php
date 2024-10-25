@@ -49,7 +49,7 @@
                 $className = $name 
                     ? 'Version' . $timestamp . ucfirst($name)
                     : 'Version' . $timestamp;
-                $filePath = __DIR__ . "/../../../migrations/{$className}.php";
+                $filePath = __DIR__ . "/../../../database/migrations/{$className}.php";
                 
                 $migrationTemplate = <<<PHP
         <?php
@@ -87,7 +87,7 @@
 
         public function makeMigration() {
             try {
-                $migrationDir = './migrations';
+                $migrationDir = './database/migrations';
                 
                 if (!is_dir($migrationDir)) {
                     Error::displayErrorMessage("Migrations directory not found.");
@@ -269,7 +269,7 @@
         }
         
         private function revertSingleMigration(string $version): void {
-            $migrationDir = './migrations';
+            $migrationDir = './database/migrations';
             $migrationFile = $migrationDir . '/' . $version . '.php';
         
             if (!$this->migrationExists($version)) {
