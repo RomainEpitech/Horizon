@@ -135,6 +135,7 @@ class HorizonEntityGenerator
         return "<?php
 
 namespace {$this->namespace};
+use Horizon\Core\Mystic\Mystic;
 
 /**
  * Class $className
@@ -142,8 +143,7 @@ namespace {$this->namespace};
  * 
  * Generated from table: $tableName
  */
-class $className
-{
+class $className extends Mystic {
     /**
      * The table associated with the model
      * @var string

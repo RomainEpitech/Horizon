@@ -1,6 +1,7 @@
 <?php
 
 namespace Horizon\App\Models;
+use Horizon\Core\Mystic\Mystic;
 
 /**
  * Class User
@@ -8,8 +9,7 @@ namespace Horizon\App\Models;
  * 
  * Generated from table: users
  */
-class User
-{
+class User extends Mystic {
     /**
      * The table associated with the model
      * @var string
