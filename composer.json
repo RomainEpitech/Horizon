@@ -17,6 +17,8 @@
             "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",
             "Horizon\\Core\\Commands\\Migrations\\": "core/commands/migrations/",
 
+            "Horizon\\Core\\Mystic\\Queries\\": "core/mystic/queries/",
+
             "Horizon\\App\\Controllers\\": "app/controllers/",
             "Horizon\\App\\Models\\": "app/models/",
 

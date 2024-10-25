@@ -2,4 +2,12 @@
 
     use Horizon\App\Models\User;
 
-    var_dump(User::findAll());
+    // $users = User::findBy([
+    //     'id' => '2',
+    // ])
+    //     ->orderBy(['created_at' => 'ASC'])
+    //     ->limit(10)
+    //     ->get();
+
+    $users = User::all();
+    var_dump($users);
