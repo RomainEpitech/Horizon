@@ -7,6 +7,7 @@ use Horizon\Core\Env\EnvLoader;
 use PDO;
 use Horizon\Core\Inc\Error;
 use Horizon\Core\Inc\Success;
+use Horizon\Core\Logs\Log;
 
 class HorizonEntityGenerator 
 {
@@ -29,42 +30,57 @@ class HorizonEntityGenerator
         $this->pdo = Database::run()->getConn();
     }
 
+    private function generateEntityForTable($tableName)
+    {
+        try {
+            $columns = $this->getTableColumns($tableName);
+            $className = $this->formatClassName($tableName);
+            $content = $this->generateEntityContent($className, $columns, $tableName);
+            
+            $dir = "./App/Models";
+            if (!is_dir($dir)) {
+                mkdir($dir, 0777, true);
+            }
+            
+            $filePath = "$dir/$className.php";
+            file_put_contents($filePath, $content);
+            
+            Success::displaySuccessMessage("Model '$className' generated successfully from table '$tableName'.");
+            Log::info("Model '$className' created.");
+        } catch (\Exception $e) {
+            Error::displayErrorMessage("Failed to generate model for table '$tableName': " . $e->getMessage());
+            Log::error("Failed to generate model for table '$tableName': " . $e->getMessage());
+        }
+    }
+
     public function generate()
     {
         try {
             $tables = $this->getTables();
             $generatedCount = 0;
+            $errors = [];
 
             foreach ($tables as $table) {
                 if (!in_array($table, $this->excludedTables)) {
-                    $this->generateEntityForTable($table);
-                    $generatedCount++;
+                    try {
+                        $this->generateEntityForTable($table);
+                        $generatedCount++;
+                    } catch (\Exception $e) {
+                        $errors[] = $table;
+                    }
                 }
             }
 
             if ($generatedCount > 0) {
-                Success::displaySuccessMessage("Generated $generatedCount model" . ($generatedCount > 1 ? 's' : '') . " successfully!");
+                if (!empty($errors)) {
+                    Error::displayErrorMessage("Failed to generate models for tables: " . implode(", ", $errors));
+                }
             } else {
                 Error::displayErrorMessage("No tables found to generate models from.");
             }
         } catch (\Exception $e) {
             Error::displayErrorMessage("Error generating entities: " . $e->getMessage());
         }
-    }
-
-    private function generateEntityForTable($tableName)
-    {
-        $columns = $this->getTableColumns($tableName);
-        $className = $this->formatClassName($tableName);
-        $content = $this->generateEntityContent($className, $columns, $tableName);
-        
-        $dir = "./App/Models";
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-        
-        $filePath = "$dir/$className.php";
-        file_put_contents($filePath, $content);
     }
 
     private function getTables()
@@ -95,21 +111,18 @@ class HorizonEntityGenerator
         foreach ($columns as $column) {
             $columnName = $column['Field'];
             $type = isset($this->customTypes[$columnName]) 
-                   ? $this->customTypes[$columnName] 
-                   : $this->getPhpTypeFromMysql($column['Type']);
+                ? $this->customTypes[$columnName] 
+                : $this->getPhpTypeFromMysql($column['Type']);
             
-            // Add property with type comment
             $properties[] = "    /** @var $type */";
             $properties[] = "    private \$$columnName;\n";
             
-            // Add to fillable if not primary key
             if ($column['Key'] !== 'PRI') {
                 $fillable[] = "'$columnName'";
             } else {
                 $primaryKey = $columnName;
             }
             
-            // Generate getter and setter
             $methodName = ucfirst($columnName);
             $gettersSetters[] = $this->generateGetter($columnName, $methodName, $type);
             $gettersSetters[] = $this->generateSetter($columnName, $methodName, $type);
