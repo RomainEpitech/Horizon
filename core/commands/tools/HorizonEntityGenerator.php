@@ -46,7 +46,7 @@ class HorizonEntityGenerator
             file_put_contents($filePath, $content);
             
             Success::displaySuccessMessage("Model '$className' generated successfully from table '$tableName'.");
-            Log::info("Model '$className' created.");
+            Log::success("Model '$className' created.");
         } catch (\Exception $e) {
             Error::displayErrorMessage("Failed to generate model for table '$tableName': " . $e->getMessage());
             Log::error("Failed to generate model for table '$tableName': " . $e->getMessage());

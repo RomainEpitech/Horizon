@@ -12,10 +12,13 @@
             "Horizon\\Core\\Router\\": "core/router/",
             "Horizon\\Core\\Lucid\\": "core/lucid/",
             "Horizon\\Core\\Logs\\": "core/logs/",
+            "Horizon\\Core\\Mystic\\": "core/mystic/",
+
             "Horizon\\Core\\Commands\\Tools\\": "core/commands/tools/",
             "Horizon\\Core\\Commands\\Migrations\\": "core/commands/migrations/",
 
             "Horizon\\App\\Controllers\\": "app/controllers/",
+            "Horizon\\App\\Models\\": "app/models/",
 
             "Horizon\\Database\\Migrations\\": "database/migrations/"
         }
