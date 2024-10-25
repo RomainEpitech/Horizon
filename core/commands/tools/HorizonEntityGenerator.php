@@ -148,19 +148,19 @@ class $className extends Mystic {
      * The table associated with the model
      * @var string
      */
-    private \$table = '$tableName';
+    protected \$table = '$tableName';
 
     /**
      * The attributes that are mass assignable
      * @var array
      */
-    private \$fillable = [$fillableStr];
+    protected \$fillable = [$fillableStr];
 
     /**
      * The primary key for the model
      * @var string
      */
-    private \$primaryKey = '$primaryKey';
+    protected \$primaryKey = '$primaryKey';
 
 $propertiesStr
 

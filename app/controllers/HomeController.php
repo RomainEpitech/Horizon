@@ -8,4 +8,8 @@
         public function renderHome() {
             $this->renderMain("Home");
         }
+
+        public function renderTest() {
+            $this->render("Test");
+        }
     }

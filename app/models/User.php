@@ -14,19 +14,19 @@ class User extends Mystic {
      * The table associated with the model
      * @var string
      */
-    private $table = 'users';
+    protected $table = 'users';
 
     /**
      * The attributes that are mass assignable
      * @var array
      */
-    private $fillable = ['email', 'password', 'created_at', 'role'];
+    protected $fillable = ['email', 'password', 'created_at', 'role'];
 
     /**
      * The primary key for the model
      * @var string
      */
-    private $primaryKey = 'id';
+    protected $primaryKey = 'id';
 
     /** @var int */
     private $id;
